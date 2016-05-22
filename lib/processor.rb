@@ -11,7 +11,7 @@ class Processor
   def process_input(input)
     args = input.split(' ')
     command = args.shift
-    results = self.class.search(command, Program.scopes)
+    results = self.class.search(command, Program.scopes.active)
     if results.length == 1
       results.first.new(args)
     else
@@ -38,16 +38,16 @@ class Processor
   def help
     messages = ['- Help -']
 
-    max_command_length = Program.scopes.map{|key| @@commands[key].keys }.flatten.map(&:length).max
+    max_command_length = Program.scopes.active.map{|key| @@commands[key].keys }.flatten.map(&:length).max
 
-    max_alias_length = Program.scopes
+    max_alias_length = Program.scopes.active
                            .map{|key| @@commands[key].values }
                            .flatten.uniq
                            .map(&:alternate_commands)
                            .compact.map{|alt| alt.join(', ') }
                            .map(&:length).max
 
-    Program.scopes.each_with_index do |key, index|
+    Program.scopes.active.each_with_index do |key, index|
       messages << "- #{key.to_s.titleize} Commands -"
       @@commands[key].each do |name, klass|
         unless klass.hidden || (!klass.alternate_commands.nil? && klass.alternate_commands.include?(name))
@@ -61,7 +61,7 @@ class Processor
           messages << "#{command}#{space[:command]} - #{aliases}#{space[:alias]} - #{help}"
         end
       end
-      messages << nil unless (index + 1) == Program.scopes.length
+      messages << nil unless (index + 1) == Program.scopes.active.length
     end
     messages << nil
   end

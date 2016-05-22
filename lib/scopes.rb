@@ -1,35 +1,39 @@
 class Scopes
-  attr_accessor :current
+  attr_accessor :active
 
   def initialize
-    self.current = [:program]
+    self.active = [:program]
   end
   # Adds a scope to the collection.
   #*********************************************************************************************************************
   def add(scope)
-    self.current = current + [scope]
+    self.active = active + [scope]
   end
   # Removes a scope from the collection.
   #*********************************************************************************************************************
   def remove(scope)
-    self.current = current - [scope]
+    self.active = active - [scope]
     scope_check
   end
   # Removes the last added scope.
   #*********************************************************************************************************************
   def remove_last
-    self.current = current[0..-2]
-    scope_check
+    remove(active[-1])
+  end
+  # Returns the newest scope scope.
+  #*********************************************************************************************************************
+  def current
+    active.last
   end
   # Returns a string of the active scope (the last added scope).
   #*********************************************************************************************************************
-  def active
-    "[#{current.last.upcase}]"
+  def to_s
+    "[#{active.last.upcase}]"
   end
   # Returns a boolean for if the scope collection is empty.
   #*********************************************************************************************************************
   def empty?
-    current.empty?
+    active.empty?
   end
 
   private

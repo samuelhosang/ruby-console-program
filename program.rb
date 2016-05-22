@@ -23,7 +23,7 @@ module Program
   # Current scopes for the Program.
   #*********************************************************************************************************************
   def self.scopes
-    @scopes.current
+    @scopes
   end
   # Command Processor instance.
   #*********************************************************************************************************************
@@ -63,7 +63,7 @@ module Program
     #*******************************************************************************************************************
     def self.run
       while @running
-        tell_user("\n#{@scopes.active} What would you like to do?")
+        tell_user("\n#{@scopes} What would you like to do?")
         begin
           @processor.process_input user_input
         rescue ProgramExceptions::Exit

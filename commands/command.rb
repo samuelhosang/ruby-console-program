@@ -1,11 +1,6 @@
 class Command
   include Console
-  #=Default Options#
-  @prefix = ''
-  @alternate_commands = nil
-  @extended_help = nil
-  @hidden = false
-  @help = 'No help defined.'
+
   # Sets args variable and runs the commend.
   #   The definition for run will leave in that commands file.
   #*********************************************************************************************************************
@@ -26,27 +21,27 @@ class Command
   #
   #*********************************************************************************************************************
   def self.hidden
-    @hidden
+    defined?(@hidden) ? @hidden : false
   end
   #
   #*********************************************************************************************************************
   def self.help
-    @help
+    defined?(@help) ? @help : 'No help defined.'
   end
   #
   #*********************************************************************************************************************
   def self.command_reference
-    (@prefix || '') + self.to_s.split('::').last.underscore
+    (defined?(@prefix) ? @prefix : '') + self.to_s.split('::').last.underscore
   end
   #
   #*********************************************************************************************************************
   def self.alternate_commands
-    @alternate_commands
+    defined?(@alternate_commands) ? @alternate_commands : nil
   end
   #
   #*********************************************************************************************************************
   def self.has_alternate_commands?
-    !@alternate_commands.nil?
+    !alternate_commands.nil?
   end
   #
   #*********************************************************************************************************************
@@ -57,11 +52,11 @@ class Command
   #
   #*********************************************************************************************************************
   def self.extended_help
-    messages = ["- Command Help: #{self.command_reference} -"]
-    messages << @extended_help||'No extended help defined.'
-    unless @alternate_commands.nil?
+    messages = ["- Command Help: #{command_reference} -"]
+    messages << (defined?(@extended_help) ? @extended_help : 'No extended help defined.')
+    unless alternate_commands.nil?
       messages << nil
-      messages << 'Aliases: ' + @alternate_commands.join(', ')
+      messages << 'Aliases: ' + alternate_commands.join(', ')
     end
     messages << nil
     return messages.flatten
