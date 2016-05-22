@@ -1,4 +1,4 @@
-module Program
+module ConsoleProgram
   require_relative 'console'
   extend Console
 
