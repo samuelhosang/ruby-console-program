@@ -37,16 +37,13 @@ class Processor
   #*********************************************************************************************************************
   def help
     messages = ['- Help -']
-
     max_command_length = Program.scopes.active.map{|key| @@commands[key].keys }.flatten.map(&:length).max
-
     max_alias_length = Program.scopes.active
                            .map{|key| @@commands[key].values }
                            .flatten.uniq
                            .map(&:alternate_commands)
                            .compact.map{|alt| alt.join(', ') }
                            .map(&:length).max
-
     Program.scopes.active.each_with_index do |key, index|
       messages << "- #{key.to_s.titleize} Commands -"
       @@commands[key].each do |name, klass|
