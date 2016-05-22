@@ -1,11 +1,11 @@
 class Command
   include Console
-
+  attr_accessor :args
   # Sets args variable and runs the commend.
   #   The definition for run will leave in that commands file.
   #*********************************************************************************************************************
   def initialize(args=[])
-    @args = args
+    self.args = args
     self.run
   end
   # Raises an error if args are not present.
@@ -16,7 +16,7 @@ class Command
   # Return true if args are present.
   #*********************************************************************************************************************
   def args_check
-    !(@args.nil? || @args == [])
+    !(args.nil? || args == [])
   end
   #
   #*********************************************************************************************************************

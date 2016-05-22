@@ -11,6 +11,7 @@ class Processor
   def process_input(input)
     args = input.split(' ')
     command = args.shift
+    return false if command.nil?
     results = self.class.search(command, Program.scopes.active)
     if results.length == 1
       results.first.new(args)
@@ -30,7 +31,6 @@ class Processor
       end
       result.new(*args)
     end
-
   end
 
   # Displays basic command help.

@@ -4,11 +4,11 @@ class Program::Help < Command
   @prefix = '/'
 
   def run
-    if @args.empty?
+    if args.empty?
       tell_user 'Displaying results for "/help".'
       display_array Program.processor.help
     else
-      if (commands = Processor.search(@args.join(' '), Program.scopes.active)).length == 1
+      if (commands = Processor.search(args.join(' '), Program.scopes.active)).length == 1
         display_array commands.first.extended_help
       else
         tell_user 'Too many commands matched input, please try again.'.red
