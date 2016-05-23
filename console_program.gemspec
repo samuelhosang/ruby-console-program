@@ -1,9 +1,9 @@
 Gem::Specification.new do |s|
   s.name        = 'console_program'
-  s.version     = '0.0.0'
+  s.version     = '0.0.1'
   s.date        = '2016-05-22'
-  s.summary     = 'API for creating console games.'
-  s.description = 'API for creating console games.'
+  s.summary     = 'API for creating console programs.'
+  s.description = 'API for creating console programs.'
   s.authors     = ['Sam Hosang']
   s.license     = 'MIT'
   s.email       = 'sam.t.m.hosang@gmail.com'
@@ -26,12 +26,6 @@ Gem::Specification.new do |s|
     lib/exceptions/program_exception/exit.rb
     lib/lib/processor.rb
     lib/lib/scopes.rb
-    lib/modules/admin/admin.rb
-    lib/modules/admin/commands/admin.rb
-    lib/modules/admin/commands/new.rb
-    lib/modules/admin/exceptions/admin_exception.rb
-    lib/modules/admin/exceptions/invalid_name.rb
-    lib/modules/admin/exceptions/unknown_object.rb
   )
 
   s.add_runtime_dependency 'colorize', '= 0.7.7'
