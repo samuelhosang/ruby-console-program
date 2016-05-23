@@ -1,4 +1,4 @@
-class Program::Clear < Command
+class ConsoleProgram::Clear < Command
   @prefix = '/'
   @extended_help = [(@help = 'Clears the game terminal.'),'/clear']
   @alternate_commands = %w`clear clr`

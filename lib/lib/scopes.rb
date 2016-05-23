@@ -40,7 +40,7 @@ class Scopes
     # Stops the program if there are no scopes present.
     #*******************************************************************************************************************
     def scope_check
-      Program.running = false if empty?
+      ConsoleProgram.running = false if empty?
     end
 
 end
