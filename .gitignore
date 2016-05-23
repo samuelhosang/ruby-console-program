@@ -1,3 +1,4 @@
 console_program-0.0.0.gem
 .idea/
 console_program-0.0.1.gem
+lib/extentions/string_reference.rb

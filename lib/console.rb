@@ -16,14 +16,18 @@ module Console
         tell_user "\n"
         return raw_input
     end
-  #rescue Interrupt;raise ProgramExceptions::Exit.new
+  rescue => error
+    raise ProgramExceptions::Exit.new if\
+      error.class == ProgramExceptions::Exit ||
+      (defined?(IRB) && error.class == IRB::Abort)
+    raise error
   end
   # Confirms an action with the user.
   # Returns a boolean.
   #*********************************************************************************************************************
   def confirm(message='Are you sure?')
     while true
-      tell_user message
+      tell_user [message, '(Y)es | (N)o']
       case input = user_input
         when /y|yes/ then return true
         when /n|no/ then return false
@@ -54,6 +58,18 @@ module Console
       end
     end
     tell_user "\n"
+  end
+  # Displays a caught ruby error in a formatted way.
+  #*********************************************************************************************************************
+  def describe_error(error)
+    tell_user [
+      nil,
+      '!!!'.red,
+      '!!! RUBY ERROR!'.red,
+      "#{'!!!'.red} #{error.message}", '!!!'.red,
+      error.backtrace.map{|m| "#{'!!!'.red} #{m}" },
+      '!!!'.red
+    ].flatten
   end
 
 end

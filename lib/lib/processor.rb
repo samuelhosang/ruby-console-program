@@ -71,12 +71,13 @@ class Processor
       Command.descendants.each do |child|
         mod, command = child.to_s.split('::')
         next if command.nil?
-        mod = 'Console' if mod == 'ConsoleProgram'
+        mod = ConsoleProgram.base_module if mod == 'ConsoleProgram'
         hash[mod.downcase.to_sym] ||= {}
         hash[mod.downcase.to_sym][child.command_reference] = child
         child.alternate_commands.each{|cmd| hash[mod.downcase.to_sym][cmd] = child } unless child.alternate_commands.nil?
       end
-      #= TODO Maybe find a better way to store the hash?
+      #= TODO (Maybe) find a better way to store the hash. -shosang
+      #   => A custom class that acts a lot like a hash?
       @@commands = hash
     end
     # Searches all loaded command files and returns an array of results.

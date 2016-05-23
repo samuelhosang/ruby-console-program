@@ -2,7 +2,8 @@ class ConsoleProgram::Reload < Command
   @alternate_commands = %w`/r`
   @prefix = '/'
   @hidden = true
-  @extended_help = [(@help = 'Reloads required game files.'),'/reload']
+  @help = 'Reloads required game files.'
+  @extended_help = [@help, '/reload']
   def run
     ConsoleProgram.reload
   end

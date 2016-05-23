@@ -2,12 +2,12 @@ class Scopes
   attr_accessor :active
 
   def initialize
-    self.active = [:console]
+    add(ConsoleProgram.base_module.downcase.to_sym)
   end
   # Adds a scope to the collection.
   #*********************************************************************************************************************
   def add(scope)
-    self.active = active + [scope]
+    self.active = (active||[]) + [scope]
   end
   # Removes a scope from the collection.
   #*********************************************************************************************************************

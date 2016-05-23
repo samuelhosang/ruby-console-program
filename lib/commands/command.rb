@@ -2,10 +2,11 @@ class Command
   include Console
   attr_accessor :args
   # Sets args variable and runs the commend.
-  #   The definition for run will leave in that commands file.
+  #   The definition for run will live in that commands file.
   #*********************************************************************************************************************
   def initialize(args=[])
     self.args = args
+    #= TODO (Required) Add a rescue block to gracefully catch errors. -shosang
     self.run
   end
   # Raises an error if args are not present.
