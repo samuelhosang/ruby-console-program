@@ -82,7 +82,7 @@ class Processor
     #*******************************************************************************************************************
     def self.search(command, scopes)
       results = []
-      scopes.each { |key| results << @@commands[key][command] if @@commands[key].has_key?(command) }
+      scopes.each{|key| results << @@commands[key][command] if @@commands[key].has_key?(command) }
       return results if results.length > 0
       raise ProgramExceptions::CommandNotFound.new(command, scopes)
     end

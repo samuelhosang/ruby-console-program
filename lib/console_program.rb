@@ -71,16 +71,17 @@ module ConsoleProgram
         rescue ProgramExceptions::ProgramException => e
           tell_user e.message
           tell_user nil
-        rescue Exception => e
-          tell_user [
-            nil,
-            nil,
-            '!!!'.red,
-            '!!! RUBY ERROR!'.red,
-            "#{'!!!'.red} #{e.message}", '!!!'.red,
-            e.backtrace.map{|m| "#{'!!!'.red} #{m}" },
-            '!!!'.red
-          ].flatten
+        # rescue Exception => e
+        #   tell_user e.inspect
+        #   tell_user [
+        #     nil,
+        #     nil,
+        #     '!!!'.red,
+        #     '!!! RUBY ERROR!'.red,
+        #     "#{'!!!'.red} #{e.message}", '!!!'.red,
+        #     e.backtrace.map{|m| "#{'!!!'.red} #{m}" },
+        #     '!!!'.red
+        #   ].flatten
         end
       end
     end

@@ -16,23 +16,20 @@ module Console
         tell_user "\n"
         return raw_input
     end
-
-  rescue Interrupt;raise ProgramExceptions::Exit.new
+  #rescue Interrupt;raise ProgramExceptions::Exit.new
   end
   # Confirms an action with the user.
   # Returns a boolean.
   #*********************************************************************************************************************
   def confirm(message='Are you sure?')
-    boolean = nil
-    while boolean.nil?
+    while true
       tell_user message
-      case (input = user_input)
-        when 'y', 'yes' then boolean = true
-        when 'n', 'no' then boolean = false
+      case input = user_input
+        when /y|yes/ then return true
+        when /n|no/ then return false
         else tell_user "Invalid option: '#{input}'"
       end
     end
-    boolean
   end
   # Displays an array in a formatted way.
   #*********************************************************************************************************************

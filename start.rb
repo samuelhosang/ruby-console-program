@@ -1,3 +1,3 @@
 # Simple script to start the program.
-require_relative 'lib/console_program.rb'
+require 'console_program'
 ConsoleProgram.initialize

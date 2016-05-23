@@ -2,7 +2,7 @@ class Scopes
   attr_accessor :active
 
   def initialize
-    self.active = [:program]
+    self.active = [:consoleprogram]
   end
   # Adds a scope to the collection.
   #*********************************************************************************************************************
