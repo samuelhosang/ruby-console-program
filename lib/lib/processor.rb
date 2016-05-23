@@ -21,13 +21,13 @@ class Processor
         multiple_commands << klass unless klass.has_alternate_commands? && klass.alternate_commands.include?(command)
       end
       result = (multiple_commands.length == 1 ? multiple_commands.first : nil)
-      puts 'Multiple commands found, which do you mean?' if result.nil?
+      tell_user 'Multiple commands found, which do you mean?' if result.nil?
       while result.nil?
         output_string = []
         results.each_with_index{|r, i| output_string << "#{i + 1}: #{r.to_s.split('::')[1..-1].join('->')}" }
         get output_string.join(results.length > 5 ? "\n" : ', ')
         result = results[input.to_i - 1]
-        puts 'Unrecognized input' if result.nil?
+        tell_user 'Unrecognized input' if result.nil?
       end
       result.new(*args)
     end
@@ -65,17 +65,18 @@ class Processor
 
   private
     # Sets available commands to be used.
-    #TODO Maybe find a better way to store the hash?
     #*******************************************************************************************************************
     def set_available_commands
       hash = {}
       Command.descendants.each do |child|
         mod, command = child.to_s.split('::')
         next if command.nil?
+        mod = 'Console' if mod == 'ConsoleProgram'
         hash[mod.downcase.to_sym] ||= {}
         hash[mod.downcase.to_sym][child.command_reference] = child
         child.alternate_commands.each{|cmd| hash[mod.downcase.to_sym][cmd] = child } unless child.alternate_commands.nil?
       end
+      #= TODO Maybe find a better way to store the hash?
       @@commands = hash
     end
     # Searches all loaded command files and returns an array of results.

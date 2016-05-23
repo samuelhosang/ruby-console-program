@@ -71,6 +71,7 @@ module ConsoleProgram
         rescue ProgramExceptions::ProgramException => e
           tell_user e.message
           tell_user nil
+        #= TODO Find a way of handling this in the current gem form. -shosang
         # rescue Exception => e
         #   tell_user e.inspect
         #   tell_user [
